@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:os="http://www.mulesoft.org/schema/mule/os"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2e41e8cc-57cd-4a39-80f2-6b1accf528eb" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<os:object-store name="Object_store" doc:name="Object store" doc:id="c2d54a60-303f-4721-8191-040fa6a0f437" entryTtl="30" entryTtlUnit="MINUTES" />
+	<flow name="sample-objectstoreFlow" doc:id="721c6bdd-b032-430d-b0cf-b0539b1c535a" >
+		<http:listener doc:name="Listener" doc:id="99592cf4-c3ef-4b2c-803f-f908f65edf13" config-ref="HTTP_Listener_config" path="store"/>
+		<os:store doc:name="Store" doc:id="446f8d0a-69b9-4de8-ab75-e193a735c78e" key="#[payload.key]" objectStore="Object_store">
+			<os:value ><![CDATA[#[payload.value]]]></os:value>
+		</os:store>
+		<logger level="INFO" doc:name="Logger" doc:id="26e89247-6471-4a1e-862d-3f8b2d61ddd0" message='#["Stored Successfully"]'/>
+		<os:retrieve-all doc:name="Retrieve all" doc:id="4b10e369-9924-49cd-839c-7731027ee14b" objectStore="Object_store"/>
+		<ee:transform doc:name="Transform Message" doc:id="45799925-3a55-4f8e-9cf6-f8e3cd572a09" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
