@@ -35,7 +35,7 @@
 						<username>mule-mcd2</username>
 						<password>Mounika@9608</password>
 						<applicationName>sample-OS-Api</applicationName>
-						<environment>Sandbox</environment>
+						<environment>dev</environment>
 						<workers>1</workers>
 						<workerType>Micro</workerType>
 				</cloudHubDeployment>
