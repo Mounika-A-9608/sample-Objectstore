@@ -30,8 +30,16 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<classifier>mule-application</classifier>
-				</configuration>
+				   <cloudHubDeployment>
+						<muleVersion>4.4.0</muleVersion>
+						<username>mule-mcd2</username>
+						<password>Mounika@9608</password>
+						<applicationName>sample-OS-Api</applicationName>
+						<environment>Sandbox</environment>
+						<workers>1</workers>
+						<workerType>Micro</workerType>
+				</cloudHubDeployment>
+			 </configuration>
 			</plugin>
 		</plugins>
 	</build>
