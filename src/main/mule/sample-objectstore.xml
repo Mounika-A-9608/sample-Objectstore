@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<os:store doc:name="Store" doc:id="446f8d0a-69b9-4de8-ab75-e193a735c78e" key="#[payload.key]" objectStore="Object_store">
 			<os:value ><![CDATA[#[payload.value]]]></os:value>
 		</os:store>
-		<logger level="INFO" doc:name="Logger" doc:id="26e89247-6471-4a1e-862d-3f8b2d61ddd0" message='#["Stored Successfully"]'/>
+		<logger level="INFO" doc:name="Logger" doc:id="26e89247-6471-4a1e-862d-3f8b2d61ddd0" message='#["Stored Successfully !!!"]'/>
 		<os:retrieve-all doc:name="Retrieve all" doc:id="4b10e369-9924-49cd-839c-7731027ee14b" objectStore="Object_store"/>
 		<ee:transform doc:name="Transform Message" doc:id="45799925-3a55-4f8e-9cf6-f8e3cd572a09" >
 			<ee:message >
